@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+      <title></title>
+  </head>
+ <body>
+      <h1>Shopping cart</h1>
+      <script>
+         var cart = [];
+         //name price count
+          var Item = function(name, price, count) {
+          	this.name = name;
+          	this.price = price;
+          	this.count = count;
+          };
+          function addItemToCart(name, price, count){
+          	for(var i in cart){
+          		if(cart[i].name === name){
+                  cart[i].count += count;
+                  return;
+          		}
+          	}
+          	var item = new Item(name, price, count);
+          	cart.push(item);
+          }
+
+          
+          function removeItemFromCart(name){
+           for (var i in cart){
+           	if(cart[i].name === name){
+           		cart[i].count --;
+           		if(cart[i].count === 0){
+           			cart.splice(i, 1);
+           		}
+           	  break;
+           	}
+           } 
+          } 
+          
+       function removeAllItemsFromCart(name) {//removes all items
+          for(var i in cart){
+               if(cart[i].name === name){
+               	cart.splice(i, 1);
+               	break;
+               }
+           }
+          }
+          function clearCart(){
+            cart = [];
+          }
+          
+          function countCart() {//returns total count for each of the items
+          	var totalCount = 0;
+            for(var i in cart){
+             totalCount += cart[i].count;
+           }
+             return totalCount;
+          }
+          function totalCart(){//returns total cost in cart
+            var totalCost = 0;
+            for(var i in cart){
+            	totalCost += (cart[i].price * cart[i].count);
+           }
+            return totalCost;
+          }
+          function listCart(){ //returns an array of items
+            return cart;
+          }
+          var a = {
+          	age: 22,
+          	name: "Mahelo"
+          };
+          var b = a.slice();
+          b.name = "Cindy";
+          console.log(a);
+          console.log(b);
+          //saveCart()
+          //loadCart()
+
+          addItemToCart("Honey", 250, 4);
+          addItemToCart("Egg", 12, 3);
+          addItemToCart("Honey", 250, 1);
+          addItemToCart("Honey", 250, 2);
+          addItemToCart("Banana", 10, 2);
+          addItemToCart("Avocado", 30, 1);
+          removeItemFromCart("Egg");
+          removeItemFromCart("Egg");
+          // clearCart();
+          console.log(totalCart());
+          console.log(countCart());
+          console.log(cart.length + " items to choose from");
+      </script>
+    </body>
+</html>
